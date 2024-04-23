@@ -1,18 +1,8 @@
-use std::io;
-
+use axum::{routing::get, Router};
 
 #[tokio::main]
 async fn main() {
-    let mut guess = String::new();
-
-    match  io::stdin().read_line(&mut guess) {
-        Ok(n) => {
-            println!("{n} is read");
-            println!("{guess} is read");
-
-        } ,
-        Err(e) => {
-            println!("{e} is thrown");
-        }
-    }
+    let app = Router::new().route("/", get(|| async{"HELLO World"}));
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:8080").await.unwrap();
+    axum::serve(listener, app).await.unwrap();
 }
