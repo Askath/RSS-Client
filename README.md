@@ -1,1 +1,1 @@
-# RSS-Client
+# FloweRSS
